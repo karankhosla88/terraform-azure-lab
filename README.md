@@ -1,81 +1,106 @@
-# Terraform Azure Lab
+# 🚀 Terraform Azure Lab (GitHub Codespaces)
 
-This lab is designed for students to practice deploying Azure resources using Terraform in GitHub Codespaces. Each student will use their own Azure subscription and follow step-by-step instructions.
+This repository provides a ready-to-use lab environment for deploying Azure resources with **Terraform** inside **GitHub Codespaces**.  
+Each student uses their own GitHub account and Azure subscription.
 
 ---
 
-## Repo Structure
+## 📂 Repository Structure
 
+```text
 terraform-azure-lab/
 ├── .devcontainer/
-│ └── devcontainer.json
+│   └── devcontainer.json       # Codespace setup (Terraform + Azure CLI)
 ├── terraform/
-│ ├── provider.tf
-│ ├── resource_group.tf
-│ ├── variables.tf
-│ └── terraform.tfvars.example
-├── .gitignore
-└── README.md
+│   ├── provider.tf             # Provider configuration
+│   ├── resource_group.tf       # Resource group definition
+│   ├── variables.tf            # Input variables
+│   └── terraform.tfvars.example# Example variables file for students
+├── .gitignore                  # Ignore local Terraform state/binaries
+└── README.md                   # Lab instructions
 
 
----
+------------------
 
-## Prerequisites
+## ✅ Prerequisites
 
-- GitHub account
-- Azure subscription (temporary lab subscription is fine)
-- Access to GitHub Codespaces
-
----
-
-## 1️⃣ Setup Codespace
-
-1. Open this repository in **GitHub Codespaces**.  
-2. Wait for the devcontainer to initialize Terraform and Azure CLI.
+- A **GitHub account**
+- Access to **GitHub Codespaces**
+- An **Azure subscription** (student/trial subscription works)
 
 ---
 
-## 2️⃣ Configure Terraform Variables
+## 🖥️ Usage
 
-1. Navigate to the `terraform` directory.  
-2. Copy the example variables file:
+Follow these steps to complete the lab:
 
-```bash
-cp terraform.tfvars.example terraform.tfvars
+1. **Launch Codespace**  
+   - Open this repo in **GitHub Codespaces**.  
+   - Wait for the devcontainer to install **Terraform** and **Azure CLI** automatically.  
+   - Verify installation:  
 
-3. Edit terraform.tfvars with your subscription and desired resource group:
-subscription_id      = "YOUR_AZURE_SUBSCRIPTION_ID"
-resource_group_name  = "YourUniqueRGName"
-location             = "East US"   # or any Azure region you prefer
+     ```bash
+     terraform --version
+     az --version
+     ```
 
-## 3️⃣ Terraform Workflow
-Run the following commands inside the terraform directory:
+2. **Configure Variables**  
+   - Navigate to the `terraform` directory.  
+   - Copy the example variables file:  
 
-# Initialize Terraform and download providers
-terraform init
+     ```bash
+     cp terraform.tfvars.example terraform.tfvars
+     ```
 
-# Preview the resources to be created
-terraform plan
+   - Edit `terraform.tfvars` and update values:  
 
-# Apply the configuration
-terraform apply
+     ```hcl
+     subscription_id      = "YOUR_AZURE_SUBSCRIPTION_ID"
+     resource_group_name  = "Student1-RG"
+     location             = "East US"
+     ```
 
-## 4️⃣ Clean Up Resources
-After the lab, destroy all resources to avoid unnecessary costs:
-terraform destroy -auto-approve
+   > 🔑 Each student must use **their own subscription ID** and a **unique resource group name**.
 
-## 5️⃣ Notes for Students
+3. **Run Terraform**  
+   - Inside the `terraform` folder, run:  
 
-Only terraform.tfvars should be modified.
+     ```bash
+     terraform init     # Download providers and initialize project
+     terraform plan     # Preview resources to be created
+     terraform apply    # Deploy resources
+     ```
 
-.terraform/ and provider binaries are ignored in the repo; Terraform downloads them automatically.
+4. **Clean Up**  
+   - After completing the lab, always destroy resources to avoid extra costs:  
 
-Each student should use a unique resource group name to avoid conflicts.
+     ```bash
+     terraform destroy -auto-approve
+     ```
 
-## 6️⃣ Best Practices
+---
 
-Do not commit .terraform/ or .tfstate files.
+## 📌 Notes for Students
 
-Use the provided .gitignore for Terraform files.
+- Only **`terraform.tfvars`** should be edited.  
+- The repo ignores `.terraform/`, `.tfstate`, and provider binaries (Terraform downloads them automatically).  
+- Each student’s resources remain isolated since everyone uses their own subscription.
 
-Always destroy lab resources after completion.
+---
+
+## 💡 Best Practices
+
+- Never commit `.terraform/` or `.tfstate` files.  
+- Always destroy resources after the lab.  
+- Keep your resource group names **unique** if using the same Azure region.
+
+---
+
+## 🎯 Lab Learning Outcomes
+
+By completing this lab, you will:
+
+- Learn how to configure the AzureRM provider for Terraform.  
+- Deploy and manage Azure resources from Codespaces.  
+- Understand how to parameterize Terraform using variables and `.tfvars`.  
+- Practice responsible cloud usage by cleaning up resources.  
