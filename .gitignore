@@ -1,1 +1,21 @@
+# Terraform local state files
+*.tfstate
+*.tfstate.backup
+
+# Terraform directories
 .terraform/
+
+# Variables file containing secrets
+terraform.tfvars
+
+# Crash logs
+crash.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Local environment files
+*.log
