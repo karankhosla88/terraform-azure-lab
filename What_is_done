@@ -1,0 +1,83 @@
+Let’s break down what’s happening in GitHub + Codespaces + Terraform lab repo in simple language:
+
+1. GitHub Repository
+
+Think of a GitHub repo like a shared folder in the cloud.
+
+You created a repo: terraform-azure-lab
+
+It contains:
+
+Terraform files (.tf)
+
+A .devcontainer config (tells Codespaces what tools to install)
+
+.gitignore (so junk files like state don’t get uploaded)
+
+README.md (instructions for students)
+
+👉 This repo is your source code + lab manual.
+
+===========
+
+2. GitHub Codespaces
+
+Codespaces is like a cloud laptop built from your repo.
+
+When you open a Codespace from your repo:
+
+It creates a temporary development environment in the cloud.
+
+It installs all the tools you told it to in .devcontainer/devcontainer.json (e.g., Terraform, Azure CLI).
+
+You get a Linux terminal + VS Code editor running inside the browser.
+
+👉 Students don’t need to install Terraform or Azure CLI locally — Codespaces handles it.
+
+===========
+3. Directory Structure Inside the Repo
+
+Here’s what your repo looks like (simplified):
+
+terraform-azure-lab/          # Your repo (on GitHub and inside Codespace)
+├── .devcontainer/            # Special folder for Codespaces setup
+│   └── devcontainer.json     # Says: "install Terraform + Azure CLI"
+├── terraform/                # Where all lab .tf files live
+│   ├── provider.tf           # Defines which cloud (Azure) + provider version
+│   ├── resource_group.tf     # Example resource (an Azure RG)
+│   ├── variables.tf          # Defines inputs (subscription_id, location, etc.)
+│   └── terraform.tfvars.example # Template values students copy & edit
+├── .gitignore                # Prevents committing Terraform state/cache
+└── README.md                 # Lab instructions
+
+👉 This structure ensures:
+
+Root folder: only setup/config docs.
+
+Terraform folder: all the infra code.
+
+Devcontainer folder: Codespaces setup.
+
+===========
+4. How Students Use It
+
+Student forks the repo (makes their own copy).
+
+Student opens Codespace → cloud editor opens with Terraform + Azure CLI ready.
+
+Inside terraform/, they:
+
+Copy terraform.tfvars.example → terraform.tfvars.
+
+Add their own subscription ID, RG name, location.
+
+Run commands below:
+az login --use-device-code
+az account set --subscription <YOUR_SUBSCRIPTION_ID>
+terraform init/plan/apply
+
+👉 Each student works in their own Azure subscription, but they all follow the same steps.
+
+===========
+
+
